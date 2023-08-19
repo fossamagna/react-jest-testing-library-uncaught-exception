@@ -1,5 +1,12 @@
 const nextJest = require('next/jest')
 
+process._original = (function (_original) {
+  return function () {
+    return _original
+  }
+})(process)
+
+
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: './',

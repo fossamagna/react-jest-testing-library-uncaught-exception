@@ -2,8 +2,19 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import styles from '@/pages/index.module.css'
+import { useCallback } from 'react';
+
+const loadData = async () => {
+  await setTimeout(() => {
+    throw new Error("load data error.");
+  }, 0);
+};
 
 export default function Home() {
+  const onClick = useCallback(() => {
+    loadData();
+  }, []);
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -46,6 +57,10 @@ export default function Home() {
             </p>
           </a>
         </div>
+
+        <button data-testid="click-me" onClick={onClick}>
+          Click me
+        </button>
       </main>
 
       <footer className={styles.footer}>
